@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+     // var word = "contemporary" && "art" && "sculpture" || "sculptures" || "paintings" || "painting" || "installation" || "photographies" || "photography" || "performance" || "artist" || "curator" || "museum" || "moma"
+    //  var word = "contemporary" && "art" && "new york" || "gallery" || "opening" || "painting" || "sculpture" || "installation"
+
+
+
+  $(document).ready(function(){
+
+    $.getJSON("http://cooper-union-search-proxy.herokuapp.com/twitter/search/%23contemporaryart filter:images", function(response){
+        console.log(response);
+        var j = response.statuses.length
+        for(var i=0; i<j; i++){
+              $("#tweets").append("<img id=tweet-"+i+" src=" + response.statuses[i].entities.media[0].media_url + ">");
+
+              (function(status, i){
+
+                $("#texts").append("<p class=text-"+i+">"+ status.text + "</p>");
+
+                $("#tweet-"+i).click(function() {
+                  console.log(status);
+                  $(".text-"+i).toggleClass("appear");
+                  $(".text-"+i).css("position","fixed");
+
+                });
+
+              })(response.statuses[i], i)
+
+
+        }
+
+
+
+
+
+    });
+  });
+
+         // %23contemporary%20%23art%20%23gallery
+      //  console.log(response.statuses[0].user.profile_image_url);
+      //  $("#tweets").append("<img src=" + response.statuses[0].user.profile_image_url + ">");
+
+    </script>
+    <style>
+      img {
+        height : 500px;
+        margin : 50px;
+      }
+
+      p {
+        font-family: sans-serif;
+        padding: 20px;
+        background-color: blue;
+        color : white;
+        width : 250px;
+        display: none;
+      }
+
+      .appear {
+        display : block;
+      }
+
+
+
+
+    </style>
+  </head>
+  <body>
+    <div id="texts"></div>
+    <div id="tweets"></div>
+
+
+  </body>
+</html>
