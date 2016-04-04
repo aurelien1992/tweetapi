@@ -20,7 +20,7 @@
 
                 $("#texts").append("<p class=text-"+i+">"+ status.text + "</p>");
 
-                $("#tweet-"+i).click(function() {
+                $("#tweet-"+i).hover(function() {
                   console.log(status);
                   $(".text-"+i).toggleClass("appear");
                   $(".text-"+i).css("position","fixed");
@@ -63,12 +63,23 @@
         display : block;
       }
 
+    h1 {
+      font-family: sans-serif;
+      margin-left: 50px;
+    }
+
+    h2 {
+      font-family: sans-serif;
+      margin-left : 50px;
+    }
 
 
 
     </style>
   </head>
   <body>
+    <h1> What is "contemporary art" ? </h1>
+    <h2> How and when do people use this term ? </h2>
     <div id="texts"></div>
     <div id="tweets"></div>
 
